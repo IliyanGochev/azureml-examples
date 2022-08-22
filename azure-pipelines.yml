@@ -24,7 +24,7 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'DP100-Test'
-    scriptType: 'pscore'
+    scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
       (Get-Content -pathsklearn-diabetes.ipynb -Raw) -replace '<SUBSCRIPTION_ID>','$(SUBSCRIPTION_ID)'
