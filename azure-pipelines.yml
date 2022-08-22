@@ -18,7 +18,7 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'DP100-Test'
-    scriptType: 'ps'
+    scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
       # Write your commands here
