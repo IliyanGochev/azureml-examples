@@ -9,7 +9,9 @@ steps:
     versionSpec: '3.8'
 - script: pip install -r sdk/dev-requirements.txt
   displayName: 'pip install notebook reqs'
-- task: Bash@3
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8'
 - script: pip install --pre azure-ai-ml mldesigner mltable azure-ai-ml==0.1.0.b6
   displayName: 'set up sdk'
 
