@@ -15,30 +15,9 @@ steps:
 - script: pip install --pre azure-ai-ml mldesigner mltable azure-ai-ml==0.1.0.b6
   displayName: 'set up sdk'
 
-- task: AzureCLI@2
+- task: Bash@3
   inputs:
-    azureSubscription: 'DP100-Test'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      # Write your commands here
-            
-            az extension add -n ml -y
-            # rc install - uncomment and adjust below to run all tests on a CLI release candidate
-            # az extension remove -n ml
-            
-            # Use a daily build
-            # az extension add --source https://azuremlsdktestpypi.blob.core.windows.net/wheels/sdk-cli-v2-public/ml-2.6.0-py3-none-any.whl --yes
-             
-            # <set_variables>
-            GROUP="azureml-examples"
-            LOCATION="eastus"
-            WORKSPACE="main"
-            # </set_variables>
-            
-            # <az_configure_defaults>
-            az configure --defaults group=$GROUP workspace=$WORKSPACE location=$LOCATION
-            # </az_configure_defaults>
+    filePath: 'cli/setup.sh'
   displayName: 'set up CLI'
 
 
