@@ -24,12 +24,14 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'DP100-Test'
-    scriptType: 'bash'
+    scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      sed -i -e "s/<SUBSCRIPTION_ID>/$(SUBSCRIPTION_ID)/g" sklearn-diabetes.ipynb
-      sed -i -e "s/<RESOURCE_GROUP>/$(RESOURCE_GROUP)/g" sklearn-diabetes.ipynb
-      sed -i -e "s/<AML_WORKSPACE_NAME>/$(AZUREML_WORKSPACE_NAME)/g" sklearn-diabetes.ipynb
-      sed -i -e "s/DefaultAzureCredential/AzureCliCredential/g" sklearn-diabetes.ipynb
+      filter sed($before,$after) { %{$_ -replace $before,$after} }
+      
+      sed "s/<SUBSCRIPTION_ID>/$(SUBSCRIPTION_ID)/g" sklearn-diabetes.ipynb
+      sed "s/<RESOURCE_GROUP>/$(RESOURCE_GROUP)/g" sklearn-diabetes.ipynb
+      sed "s/<AML_WORKSPACE_NAME>/$(AZUREML_WORKSPACE_NAME)/g" sklearn-diabetes.ipynb
+      sed "s/DefaultAzureCredential/AzureCliCredential/g" sklearn-diabetes.ipynb
       papermill -k python sklearn-diabetes.ipynb sklearn-diabetes.output.ipynb
     workingDirectory: 'sdk/jobs/single-step/scikit-learn/diabetes'
