@@ -27,11 +27,9 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      filter sed($before,$after) { %{$_ -replace $before,$after} }
-      
-      sed "s/<SUBSCRIPTION_ID>/$(SUBSCRIPTION_ID)/g" sklearn-diabetes.ipynb
-      sed "s/<RESOURCE_GROUP>/$(RESOURCE_GROUP)/g" sklearn-diabetes.ipynb
-      sed "s/<AML_WORKSPACE_NAME>/$(AZUREML_WORKSPACE_NAME)/g" sklearn-diabetes.ipynb
-      sed "s/DefaultAzureCredential/AzureCliCredential/g" sklearn-diabetes.ipynb
+      (Get-Content -pathsklearn-diabetes.ipynb -Raw) --replace '<SUBSCRIPTION_ID>','$(SUBSCRIPTION_ID)'
+      (Get-Content -pathsklearn-diabetes.ipynb -Raw) --replace '<RESOURCE_GROUP>','$(RESOURCE_GROUP)'
+      (Get-Content -pathsklearn-diabetes.ipynb -Raw) --replace '<AML_WORKSPACE_NAME>','$(AZUREML_WORKSPACE_NAME)'
+      (Get-Content -pathsklearn-diabetes.ipynb -Raw) --replace 'DefaultAzureCredential','AzureCliCredential'      
       papermill -k python sklearn-diabetes.ipynb sklearn-diabetes.output.ipynb
     workingDirectory: 'sdk/jobs/single-step/scikit-learn/diabetes'
