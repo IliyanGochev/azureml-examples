@@ -31,5 +31,6 @@ steps:
       (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace '<RESOURCE_GROUP>','$(RESOURCE_GROUP)' | Set-Content -Path sklearn-diabetes.ipynb
       (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace '<AML_WORKSPACE_NAME>','$(AZUREML_WORKSPACE_NAME)' | Set-Content -Path sklearn-diabetes.ipynb
       (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace 'DefaultAzureCredential','AzureCliCredential' | Set-Content -Path sklearn-diabetes.ipynb
+      (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace 'cpu-cluster','aml' | Set-Content -Path sklearn-diabetes.ipynb
       papermill -k python sklearn-diabetes.ipynb sklearn-diabetes.output.ipynb
     workingDirectory: 'sdk/jobs/single-step/scikit-learn/diabetes'
