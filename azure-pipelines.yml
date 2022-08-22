@@ -27,9 +27,9 @@ steps:
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      (Get-Content -pathsklearn-diabetes.ipynb -Raw) -replace '<SUBSCRIPTION_ID>','$(SUBSCRIPTION_ID)'
-      (Get-Content -pathsklearn-diabetes.ipynb -Raw) -replace '<RESOURCE_GROUP>','$(RESOURCE_GROUP)'
-      (Get-Content -pathsklearn-diabetes.ipynb -Raw) -replace '<AML_WORKSPACE_NAME>','$(AZUREML_WORKSPACE_NAME)'
-      (Get-Content -pathsklearn-diabetes.ipynb -Raw) -replace 'DefaultAzureCredential','AzureCliCredential'      
+      (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace '<SUBSCRIPTION_ID>','$(SUBSCRIPTION_ID)'
+      (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace '<RESOURCE_GROUP>','$(RESOURCE_GROUP)'
+      (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace '<AML_WORKSPACE_NAME>','$(AZUREML_WORKSPACE_NAME)'
+      (Get-Content -path sklearn-diabetes.ipynb -Raw) -replace 'DefaultAzureCredential','AzureCliCredential'      
       papermill -k python sklearn-diabetes.ipynb sklearn-diabetes.output.ipynb
     workingDirectory: 'sdk/jobs/single-step/scikit-learn/diabetes'
